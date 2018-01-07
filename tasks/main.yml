@@ -1,0 +1,13 @@
+---
+# tasks file for letsencrypt
+- apt_repository:
+    repo: 'ppa:certbot/certbot'
+
+- apt:
+    name: python-certbot-nginx 
+    state: present
+    update_cache: yes
+
+- shell: |
+    /usr/bin/certbot --nginx -d {{ server_name }} --email {{ letsencrypt_email }} --non-interactive --agree-tos
+
